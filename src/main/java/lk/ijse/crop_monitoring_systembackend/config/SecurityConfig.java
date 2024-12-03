@@ -32,6 +32,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
+        //noinspection removal
         security.csrf(AbstractHttpConfigurer::disable).cors(Customizer.withDefaults())
                 .authorizeRequests(req -> req.requestMatchers("api/v1/auth/").permitAll()
                         .anyRequest().authenticated())

@@ -9,4 +9,3 @@ public interface AuthenticationService {
     JWTAuthResponse signUp(UserDTO signUp);
     JWTAuthResponse refreshToken(String accessToken);
 }
-

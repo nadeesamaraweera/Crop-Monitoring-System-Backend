@@ -71,7 +71,7 @@ public class AuthController {
                 token = token.substring(7);
             }
 
-            boolean isValid = jwtService.isTokenExpired(token);
+            boolean isValid = !jwtService.isTokenExpired(token);
             if (isValid) {
                 return ResponseEntity.ok("Token is valid");
             } else {
