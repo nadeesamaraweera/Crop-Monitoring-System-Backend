@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
 public class UserController {
     @Autowired
     private UserService userService;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     private static final Logger logger = Logger.getLogger(UserController.class.getName());
 
@@ -29,7 +30,7 @@ public class UserController {
     public ResponseEntity<String> updateUser(@PathVariable("email") String email, @RequestBody UserDTO user) {
         if (email != null && user != null) {
             try {
-               // user.setPassword(passwordEncoder.encode(user.getPassword()));
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
                 userService.updateUser(email, user);
                 logger.info("User password updated successfully: " + user);
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
