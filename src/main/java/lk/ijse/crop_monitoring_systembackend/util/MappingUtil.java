@@ -1,9 +1,6 @@
 package lk.ijse.crop_monitoring_systembackend.util;
 
-import lk.ijse.crop_monitoring_systembackend.dto.CropDTO;
-import lk.ijse.crop_monitoring_systembackend.dto.FieldCropDTO;
-import lk.ijse.crop_monitoring_systembackend.dto.FieldDTO;
-import lk.ijse.crop_monitoring_systembackend.dto.FieldStaffDTO;
+import lk.ijse.crop_monitoring_systembackend.dto.*;
 import lk.ijse.crop_monitoring_systembackend.entity.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +80,19 @@ public class MappingUtil {
 
     public List<CropDTO> cropConvertToDTOList(List<CropEntity> cropEntities) {
         return cropEntities.stream().map(this::cropConvertToDTO).toList();
+    }
+
+    // Matters of StaffEntity & StaffDTO
+    public StaffDTO staffConvertToDTO(StaffEntity staffEntity) {
+        return modelMapper.map(staffEntity, StaffDTO.class);
+    }
+
+    public StaffEntity staffConvertToEntity(StaffDTO staffDTO) {
+        return modelMapper.map(staffDTO, StaffEntity.class);
+    }
+
+    public List<StaffDTO> staffConvertToDTOList(List<StaffEntity> staffEntities) {
+        return staffEntities.stream().map(this::staffConvertToDTO).toList();
     }
 
 }
