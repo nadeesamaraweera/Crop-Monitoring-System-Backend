@@ -1,4 +1,4 @@
-package com.example.Crop_Monitoring_System.GreenShadow._BackEnd;
+package lk.ijse.crop_monitoring_systembackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

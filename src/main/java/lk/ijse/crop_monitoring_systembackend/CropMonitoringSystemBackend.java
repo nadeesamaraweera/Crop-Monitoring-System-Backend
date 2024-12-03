@@ -1,13 +1,13 @@
-package com.example.Crop_Monitoring_System.GreenShadow._BackEnd;
+package lk.ijse.crop_monitoring_systembackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Application {
+public class CropMonitoringSystemBackend {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(CropMonitoringSystemBackend.class, args);
 	}
 
 }
