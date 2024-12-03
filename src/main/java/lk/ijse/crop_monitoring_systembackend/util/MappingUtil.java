@@ -1,5 +1,6 @@
 package lk.ijse.crop_monitoring_systembackend.util;
 
+import lk.ijse.crop_monitoring_systembackend.dto.CropDTO;
 import lk.ijse.crop_monitoring_systembackend.dto.FieldCropDTO;
 import lk.ijse.crop_monitoring_systembackend.dto.FieldDTO;
 import lk.ijse.crop_monitoring_systembackend.dto.FieldStaffDTO;
@@ -69,6 +70,19 @@ public class MappingUtil {
 
     public List<FieldStaffDTO> fieldStaffConvertToDTOList(List<FieldStaffEntity> fieldStaffEntities) {
         return fieldStaffEntities.stream().map(this::fieldStaffConvertToDTO).toList();
+    }
+
+    // Maters of CropEntity & CropDTO
+    public CropDTO cropConvertToDTO(CropEntity cropEntity) {
+        return modelMapper.map(cropEntity, CropDTO.class);
+    }
+
+    public CropEntity cropConvertToEntity(CropDTO cropDTO) {
+        return modelMapper.map(cropDTO, CropEntity.class);
+    }
+
+    public List<CropDTO> cropConvertToDTOList(List<CropEntity> cropEntities) {
+        return cropEntities.stream().map(this::cropConvertToDTO).toList();
     }
 
 }
