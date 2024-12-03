@@ -95,4 +95,49 @@ public class MappingUtil {
         return staffEntities.stream().map(this::staffConvertToDTO).toList();
     }
 
+    // Maters of EquipmentEntity & EquipmentDTO
+    public EquipmentEntity equipmentConvertToEntity(EquipmentDTO equipmentDTO) {
+        EquipmentEntity entity = new EquipmentEntity();
+        entity.setEquipmentId(equipmentDTO.getEquipmentId());
+        entity.setCategory(equipmentDTO.getCategory());
+        entity.setType(equipmentDTO.getType());
+        entity.setStatus(equipmentDTO.getStatus());
+
+        if (equipmentDTO.getEqStaff() != null) {
+            StaffEntity staffEntity = new StaffEntity();
+            staffEntity.setStaffId(equipmentDTO.getEqStaff());
+            entity.setStaff(staffEntity);;
+        }
+
+        if (equipmentDTO.getEqField() != null) {
+            FieldEntity fieldEntity = new FieldEntity();
+            fieldEntity.setFieldId(equipmentDTO.getEqField());
+            entity.setField(fieldEntity);
+        }
+
+        return entity;
+    }
+
+    public EquipmentDTO equipmentConvertToDTO(EquipmentEntity entity) {
+        EquipmentDTO dto = new EquipmentDTO();
+        dto.setEquipmentId(entity.getEquipmentId());
+        dto.setCategory(entity.getCategory());
+        dto.setType(entity.getType());
+        dto.setStatus(entity.getStatus());
+
+        if (entity.getStaff() != null) {
+            dto.setEqStaff(entity.getStaff().getStaffId());
+        }
+        if (entity.getField() != null) {
+            dto.setEqField(entity.getField().getFieldId());
+        }
+
+        return dto;
+    }
+
+    public List<EquipmentDTO> equipmentConvertToDTOList(List<EquipmentEntity> equipmentEntities) {
+        return equipmentEntities.stream().map(this::equipmentConvertToDTO).toList();
+    }
+
+
 }
