@@ -187,6 +187,14 @@ public class MappingUtil {
         return vehicleEntities.stream().map(this::vehicleConvertToDTO).toList();
     }
 
+    // Maters of UserEntity & UserDTO
+    public UserDTO userConvertToDTO(UserEntity userEntity) {
+        return modelMapper.map(userEntity, UserDTO.class);
+    }
+
+    public UserEntity userConvertToEntity(UserDTO userDTO) {
+        return modelMapper.map(userDTO, UserEntity.class);
+    }
 
 
 
