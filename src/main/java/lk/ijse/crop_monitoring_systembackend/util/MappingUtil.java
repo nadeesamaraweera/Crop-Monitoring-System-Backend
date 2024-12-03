@@ -139,5 +139,28 @@ public class MappingUtil {
         return equipmentEntities.stream().map(this::equipmentConvertToDTO).toList();
     }
 
+    // Maters of LogEntity & LogDTO
+    public LogDTO logConvertToDTO(LogEntity logEntity) {
+        LogDTO logDTO = new LogDTO();
+        logDTO.setLogId(logEntity.getLogId());
+        logDTO.setDate(logEntity.getDate());
+        logDTO.setDetails(logEntity.getDetails());
+        logDTO.setObservedImg(logEntity.getObservedImg());
+        logDTO.setTemperature(logEntity.getTemperature());
+        logDTO.setCropId(logEntity.getCrop().getCropId());
+        logDTO.setFieldId(logEntity.getField().getFieldId());
+        logDTO.setStaff(new ArrayList<>());
+        return logDTO;
+    }
+
+    public LogEntity logConvertToEntity(LogDTO logDTO) {
+        return modelMapper.map(logDTO, LogEntity.class);
+    }
+
+    public List<LogDTO> logConvertToDTOList(List<LogEntity> logEntities) {
+        return logEntities.stream().map(this::logConvertToDTO).toList();
+    }
+
+
 
 }
