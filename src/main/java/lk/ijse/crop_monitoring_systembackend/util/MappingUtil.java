@@ -161,6 +161,19 @@ public class MappingUtil {
         return logEntities.stream().map(this::logConvertToDTO).toList();
     }
 
+    // Maters of StaffLogEntity & StaffLogDTO
+    public StaffLogDTO staffLogConvertToDTO(StaffLogEntity staffLogEntity) {
+        return modelMapper.map(staffLogEntity, StaffLogDTO.class);
+    }
+
+    public StaffLogEntity staffLogConvertToEntity(StaffLogDTO staffLogDTO) {
+        return modelMapper.map(staffLogDTO, StaffLogEntity.class);
+    }
+
+    public List<StaffLogDTO> staffLogConvertToDTOList(List<StaffLogEntity> staffLogEntities) {
+        return staffLogEntities.stream().map(this::staffLogConvertToDTO).toList();
+    }
+
 
 
 }
