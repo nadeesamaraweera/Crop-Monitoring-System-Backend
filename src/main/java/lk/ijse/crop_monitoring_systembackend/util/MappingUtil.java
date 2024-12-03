@@ -174,6 +174,20 @@ public class MappingUtil {
         return staffLogEntities.stream().map(this::staffLogConvertToDTO).toList();
     }
 
+    // Maters of VehicleEntity & VehicleDTO
+    public VehicleDTO vehicleConvertToDTO(VehicleEntity vehicleEntity) {
+        return modelMapper.map(vehicleEntity, VehicleDTO.class);
+    }
+
+    public VehicleEntity vehicleConvertToEntity(VehicleDTO vehicleDTO) {
+        return modelMapper.map(vehicleDTO, VehicleEntity.class);
+    }
+
+    public List<VehicleDTO> vehicleConvertToDTOList(List<VehicleEntity> vehicleEntities) {
+        return vehicleEntities.stream().map(this::vehicleConvertToDTO).toList();
+    }
+
+
 
 
 }
