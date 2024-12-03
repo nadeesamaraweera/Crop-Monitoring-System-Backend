@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,6 +29,7 @@ public class LogController {
 
     private static final Logger logger = Logger.getLogger(LogController.class.getName());
 
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_SCIENTIST')")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> saveLog(
             @Valid
@@ -46,7 +48,7 @@ public class LogController {
             logDTO.setFieldId(fieldId);
             logDTO.setCropId(cropId);
             logService.saveLog(logDTO);
-           logger.info("Log saved successfully: " + logDTO);
+            logger.info("Log saved successfully: " + logDTO);
             return new ResponseEntity<>("Log saved successfully", HttpStatus.CREATED);
         } catch (DataPersistFailedException e) {
             e.printStackTrace();
@@ -60,6 +62,7 @@ public class LogController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_SCIENTIST')")
     @PatchMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> updateLog(
             @Valid
@@ -92,6 +95,7 @@ public class LogController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_SCIENTIST') or hasRole('ROLE_ADMINISTRATIVE')")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Response findLog(@PathVariable String id) {
         if (id != null) {
@@ -109,6 +113,7 @@ public class LogController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_SCIENTIST') or hasRole('ROLE_ADMINISTRATIVE')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<LogDTO> getAllLogs() {
         try {
@@ -122,6 +127,7 @@ public class LogController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_SCIENTIST')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> deleteLog(@PathVariable String id) {
         if (id != null) {

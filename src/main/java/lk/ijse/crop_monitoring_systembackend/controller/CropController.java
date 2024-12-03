@@ -6,15 +6,18 @@ import jakarta.validation.Valid;
 import lk.ijse.crop_monitoring_systembackend.customResponse.ErrorResponse;
 import lk.ijse.crop_monitoring_systembackend.customResponse.Response;
 import lk.ijse.crop_monitoring_systembackend.dto.CropDTO;
+import lk.ijse.crop_monitoring_systembackend.dto.FieldCropDTO;
 import lk.ijse.crop_monitoring_systembackend.exception.DataPersistFailedException;
 import lk.ijse.crop_monitoring_systembackend.exception.NotFoundException;
 import lk.ijse.crop_monitoring_systembackend.service.CropService;
 import lk.ijse.crop_monitoring_systembackend.util.AppUtil;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +34,7 @@ public class CropController {
 
     private static final Logger logger = Logger.getLogger(CropController.class.getName());
 
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_SCIENTIST')")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> saveCrop(
             @Valid @RequestPart("commonName") String commonName,
@@ -75,6 +79,7 @@ public class CropController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_SCIENTIST')")
     @PatchMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> updateCrop(
             @PathVariable String id,
@@ -86,8 +91,8 @@ public class CropController {
             @RequestPart("fields") String fields) {
         try {
             byte[] img = cropImg.getBytes();
-            String base64Img = AppUtil.toBase64Pic(img);            
-           
+            String base64Img = AppUtil.toBase64Pic(img);
+
             ObjectMapper objectMapper = new ObjectMapper();
             List<String> fieldList = objectMapper.readValue(fields, new TypeReference<>() {});
             CropDTO cropDTO = new CropDTO();
@@ -110,6 +115,7 @@ public class CropController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_SCIENTIST') or hasRole('ROLE_ADMINISTRATIVE')")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Response searchCrop(@PathVariable String id) {
         try {
@@ -122,6 +128,7 @@ public class CropController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_SCIENTIST') or hasRole('ROLE_ADMINISTRATIVE')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CropDTO> getAllCrops() {
         try {
@@ -134,6 +141,7 @@ public class CropController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_SCIENTIST')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> deleteCrop(@PathVariable String id) {
         if (id != null) {

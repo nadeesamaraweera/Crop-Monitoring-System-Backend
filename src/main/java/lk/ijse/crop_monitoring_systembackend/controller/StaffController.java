@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class StaffController {
 
     private static final Logger logger = Logger.getLogger(StaffController.class.getName());
 
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMINISTRATIVE')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveStaff(@Valid @RequestBody StaffDTO staff) {
         if (staff != null) {
@@ -46,6 +48,7 @@ public class StaffController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMINISTRATIVE')")
     @PatchMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateStaff(@Valid @PathVariable("id") String id, @RequestBody StaffDTO staff) {
         if (id != null && staff != null) {
@@ -66,6 +69,7 @@ public class StaffController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_SCIENTIST') or hasRole('ROLE_ADMINISTRATIVE')")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Response findStaff(@PathVariable("id") String id) {
         if (id != null) {
@@ -84,6 +88,7 @@ public class StaffController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_SCIENTIST') or hasRole('ROLE_ADMINISTRATIVE')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<StaffDTO> getAllStaffs() {
         try {
@@ -96,6 +101,7 @@ public class StaffController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMINISTRATIVE')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> deleteStaff(@PathVariable("id") String id) {
         if (id != null) {
