@@ -1,6 +1,6 @@
 # 🌱 **Green Shadow Management System - Backend** 🌾
-_A Spring Boot-powered backend system for efficient farm management._
-
+_A Spring Boot-powered backend system for efficient farm management._<br>
+This backend system is designed to help manage key aspects of farm operations, including field management, crop tracking, staff records, and more. It utilizes Spring Boot for a robust, scalable architecture, allowing easy integration with the frontend and providing seamless management of farm resources across various roles and access levels.
 ---
 ## 🎯 **Features**
 ✨ **Field Management**: CRUD operations with GPS integration.  
@@ -12,7 +12,9 @@ _A Spring Boot-powered backend system for efficient farm management._
 📊 **Data Analysis**: Perform relational, spatial, and temporal analysis.  
 ✅ **Validation**: Comprehensive validation at all levels.  
 ⚠️ **Custom Exception Handling**: Informative error messages for better debugging.
+
 ---
+
 ## 🛠️ **Tech Stack**
 ### 🖥️ **Backend Frameworks & Libraries**
 - **🌟 Spring Boot**: Core framework.
@@ -31,6 +33,12 @@ _A Spring Boot-powered backend system for efficient farm management._
 - 📌 **Java 17** or higher
 - 📌 **MySQL Server** installed and running
 - 📌 **Gradle** for dependency management
+- 📌 **Postman** To test and explore the APIs.
+
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 ---
 ## 🏗️ **Key Modules**
@@ -55,24 +63,30 @@ _A Spring Boot-powered backend system for efficient farm management._
 git clone <https://github.com/nadeesamaraweera/Crop-Monitoring-System-Backend.git>
 
 ----
-## 🔗 **API Endpoints**
+# 🔗 **API Endpoints**
 
-| HTTP Method | Endpoint               | Description                | Role Access               |
-|-------------|------------------------|----------------------------|---------------------------|
-| POST        | /api/auth/signIn       | Login to the system        | All Roles                 |
-| POST        | /api/field             | Add a new field            | MANAGER                   |
-| GET         | /api/field             | Retrieve all fields        | All Roles                 |
-| PUT         | /api/field/{fieldCode} | Update field details       | MANAGER                   |
-| DELETE      | /api/field/{fieldCode} | Delete a field             | MANAGER                   |
-| POST        | /api/crop              | Add a new crop             | MANAGER, SCIENTIST        |
-| GET         | /api/crop              | Retrieve all crops         | All Roles                 |
-| POST        | /api/staff             | Add new staff              | MANAGER, ADMINISTRATIVE   |
-| GET         | /api/staff             | Retrieve all staff         | All Roles                 |
+Base URL: `http://localhost:8080/greenShadow/`
 
-📖 **Full API documentation** is available in the project folder.
+End Points : **POST | GET | PATCH | DELETE**
 
+Example :
+- **POST**: `/api/auth/signIn` -> Login to the system
+- **POST**: `/api/field` -> Add a new field
+- **GET**: `/api/field` -> Retrieve all fields
+- **GET**: `/api/field/{fieldCode}` -> Retrieve a specific field
+- **PATCH**: `/api/field/{fieldCode}` -> Update field details
+- **DELETE**: `/api/field/{fieldCode}` -> Delete a field  
+
+ ## 📖 **API Documentation**
+ To test or explore the API, you can use tools like Postman. Detailed documentation is available at:
+<br>
+ [API Documentation](https://documenter.getpostman.com/view/35385577/2sAYBa88t2)
 
 ---
 ## 📜 **License**
 
-This project is licensed under the [MIT License](https://github.com/nadeesamaraweera/Crop-Monitoring-System-Backend/MIT).
+This project is licensed under the MIT License.See the [LICENSE](./LICENSE) file for details.
+
+----
+
+Copyright © 2024 Nadeesha Samaraweera
