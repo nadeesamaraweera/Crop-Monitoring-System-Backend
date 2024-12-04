@@ -1,6 +1,8 @@
 # 🌱 **Green Shadow Management System - Backend** 🌾
 _A Spring Boot-powered backend system for efficient farm management._<br>
+
 This backend system is designed to help manage key aspects of farm operations, including field management, crop tracking, staff records, and more. It utilizes Spring Boot for a robust, scalable architecture, allowing easy integration with the frontend and providing seamless management of farm resources across various roles and access levels.
+
 ---
 ## 🎯 **Features**
 ✨ **Field Management**: CRUD operations with GPS integration.  
